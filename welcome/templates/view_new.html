@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<style media="screen" type="text/css">
+        #content
+        {
+%            width: 95%;
+        }
+ul.cards{
+  padding: 0;
+  list-style: none;
+}
+li.cards{
+  display: inline;
+}
+#small_card {
+    ;
+    }
+#big_card {
+    position: relative;
+    left: 0%;
+    top: 0%;
+    display: none;
+    }
+#small_card:hover + #big_card {
+    display: inline;
+    }
+</style>
+
+<div id="content">
+    <h2>Event #{{ event }}, pack {{ pack }}, pick {{ pick }} drafted by {{drafter}} on {{time}}</h2>
+  <!--  <p>(First card is the actual pick)</p> -->
+{% include "picksNavigation.html" %}
+
+<!--можно сделать слой с маленькой картинкой position: relative.
+А у слоя с большой картой position: absolute; left: 100%; top: 30%; display: none;
+слой с большой картой вложен в слой с маленькой
+а потом у слоя с маленькой картой добавить :hover .big_cart { display: none; }
+чтобы появлялась не сразу можно transition-delay: 0.3s
+-->
+
+<ul class="cards">
+{% for card in cards %}
+    <li class="cards">
+
+            <div id="small_card">
+            <a href="{{card.GetGathererUrl}}">
+                <img src="{{card.url}}" alt="{{card.name}}" width="190px" height="264px"
+                {% if card == cards|first %}
+                border="5" style="border: 4px red solid;"
+                {% endif %}
+            ></a>
+            </div>
+            {% if card == cards|first %}
+            <div id="big_card">
+                <img src="{{card.url}}" alt="{{card.name}}" width="380px" height="528px">
+            </div>
+            {% endif %}
+            <!--<figure>
+            <img src="{{card.url}}" alt="{{card.name}}" width="223px" height="310px">
+            <figcaption>{{card.name}}</figcaption>
+            </figure>
+            -->
+
+    </li>
+{% endfor %}
+</ul>
+{% include "picksNavigation.html" %}
+</div>
+<div id="aside">
+    <h3>Previously picked cards</h3>
+    <ul class="cards">
+    {% for card in prevPicks %}
+        <li class="cards">
+            {{card}},
+        </li>
+    {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

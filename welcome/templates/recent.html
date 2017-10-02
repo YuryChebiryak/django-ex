@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<style media="screen" type="text/css">
+        #content
+        {
+            width: 95%;
+        }
+</style>
+
+<div id="content">
+<h2>Recent drafts</h2>
+
+
+    {% for draft in drafts %}
+    <p>
+            <a href="{{draft.url}}">Event #{{draft.eventNo}}</a>, drafted by {{draft.drafter}} on {{draft.time}}
+    </p>
+
+    {% endfor %}
+
+
+
+</div>
+{% endblock %}

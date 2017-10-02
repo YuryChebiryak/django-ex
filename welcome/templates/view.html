@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<style media="screen" type="text/css">
+        #content
+        {
+%            width: 95%;
+        }
+ul.cards{
+  padding: 0;
+  list-style: none;
+}
+
+li.cards{
+  display: inline;
+}
+</style>
+
+<div id="content">
+    <h2>Event #{{ event }}, pack {{ pack }}, pick {{ pick }} drafted by {{drafter}} on {{time}}</h2>
+  <!--  <p>(First card is the actual pick)</p> -->
+{% include "picksNavigation.html" %}
+
+<ul class="cards">
+{% for card in cards %}
+    <li class="cards">
+        <a href="{{card.GetGathererUrl}}">
+            <img src="{{card.url}}" alt="{{card.name}}" width="190px" height="264px"
+                {% if card == cards|first %}
+                border="5" style="border: 4px red solid;"
+                {% endif %}
+            >
+            <!--<figure>
+            <img src="{{card.url}}" alt="{{card.name}}" width="223px" height="310px">
+            <figcaption>{{card.name}}</figcaption>
+            </figure>
+            -->
+        </a>
+    </li>
+{% endfor %}
+</ul>
+{% include "picksNavigation.html" %}
+</div>
+<div id="aside">
+    <h3>Previously picked cards</h3>
+    <ul class="cards">
+    {% for card in prevPicks %}
+        <li class="cards">
+            {{card}},
+        </li>
+    {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

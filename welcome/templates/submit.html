@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="content">
+
+<h1>Submit your draft</h1>
+<form method="post" action="handlesubmit" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="myfile"/>
+  <input type="submit" name="submit" value="Submit"/>
+  <input type="hidden" name="MAX_FILE_SIZE" value="15000" />
+</form>
+
+</div>
+<div id="aside">
+    <h3>How does it work?</h3>
+<p>Your Magic the Gathering online beta client saves your picks during drafts in a text file.
+You can review these settings under 'Account' -&gt; 'Game History' -&gt; 'Auto Save Draft Logs'
+All you need to do is to locate such a file and <a href="{{submit}}">submit</a> it.
+</p>
+    <p>After submitting you will be automatically redirected to the page with your draft.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<style media="screen" type="text/css">
+        #content
+        {
+            width: 95%;
+        }
+</style>
+
+<div id="content">
+<h2>What is it for?</h2>
+<p>This is non-profit service for fans of Magic: the Gathering to share and
+    discuss their drafts.</p>
+<p>As a newcomer to MtG (my first drafts were in February 2013)
+    for me to have some lessons learned and progress in this game,
+    I often discuss my past drafts with more experienced players.
+    However, it can be a hassle to post your drafted deck together with picks on forums or IM.
+ I realized why not to make a web-service for exactly that purpose.</p>
+
+<h2>How does it work?</h2>
+<p>
+Your Magic the Gathering online beta client saves your picks during drafts in a text file.
+You can review these settings under 'Account' -&gt; 'Game History' -&gt; 'Auto Save Draft Logs'
+All you need to do is to locate such a file and <a href="submit">submit</a> it.
+</p>
+
+
+
+{% include "disclaimer.html" %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Draft Viewer: a way to review Magic the Gathering Online draftcaps">
+        <meta name="keywords" content="MTG,magic,the,gathering,MTGO,online,TCG,trading,card,game,draft,view,viewer,web,service,free,">
+        <meta name="author" content="MadMetalist">
+
+        <link href='http://fonts.googleapis.com/css?family=Amethysta|Kranky' rel='stylesheet' type='text/css'>
+
+	<title>Draft viewer</title>
+	<style type="text/css" media="screen">
+        *{font-family: 'Amethysta', serif;
+        }
+        #container
+        {
+            margin: 0 auto;
+            width: 100%;
+            background: #fff;
+        }
+
+        #header
+        {
+           background: #ccc;
+            padding: 20px;
+        }
+
+        #header h1 { font-family: 'Kranky', cursive; margin: 0; }
+        h1 { font-family: 'Kranky', cursive; margin: 0; }
+
+        #navigation
+        {
+            float: left;
+            width: 100%;
+            background: #333;
+        }
+
+        #navigation ul
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+        #navigation ul li
+        {
+            list-style-type: none;
+            display: inline;
+        }
+
+        #navigation li a
+        {
+            display: block;
+            float: left;
+            padding: 5px 10px;
+            color: #fff;
+            text-decoration: none;
+            border-right: 1px solid #fff;
+        }
+
+        #navigation li a:hover { background: #383; }
+
+        #content-container
+        {
+            float: left;
+            width: 100%;
+            background: #FFF url(layout-two-liquid-background.gif) repeat-y 68% 0;
+        }
+
+        #content
+        {
+            clear: left;
+            float: left;
+            width: 70%;
+            padding: 20px 0;
+            margin: 0 0 0 4%;
+            display: inline;
+            min-height: 400px;
+        }
+
+        #content h2 { font-family: 'Kranky', cursive;margin: 0; }
+
+        #aside
+        {
+            float: right;
+            width: 21%;
+            padding: 20px 0;
+            margin: 0 3% 0 0;
+            display: inline;
+        }
+
+        #aside h3 { font-family: 'Kranky', cursive;margin: 0; }
+
+        #footer
+        {
+            clear: left;
+            background: #ccc;
+            text-align: right;
+            padding: 20px;
+            height: 1%;
+        }
+        </style>
+    </head>
+	<body>
+    <!-- js sdk
+    <div id="fb-root"></div>
+
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+     js sdk ends -->
+    {% include "header.html" %}
+    <div id="content-container">
+
+            {% block content %}
+            {% endblock %}
+
+        <div id="footer">
+            Your <a href="mailto:draftviewerfeedback@gmail.com">feedback</a> is welcome! <br/>
+            To support Draft Viewer, like and share its page on <a href="https://www.facebook.com/draftviewer">Facebook</a>!<br/>
+            Copyright (c) Yury Chebiryak, 2013-2017.
+        </div>
+    </div>
+
+    {% include "footer.html" %}
+
+    </body>
+</html>

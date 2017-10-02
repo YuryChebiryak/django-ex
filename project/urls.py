@@ -1,14 +1,19 @@
-from django.conf.urls import include, url
+from django.conf.urls import patterns, include, url
+
 from django.contrib import admin
+admin.autodiscover()
+from django.conf.urls.static import static
+#import settings
 
-from welcome.views import index, health
-
-urlpatterns = [
-    # Examples:
-    # url(r'^$', 'project.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^$', index),
-    url(r'^health$', health),
-    url(r'^admin/', include(admin.site.urls)),
-]
+urlpatterns = patterns('',
+    #url(r'^admin/', include(admin.site.urls)),
+    url(r'view/(?P<id>\d*)/(?P<pack>\d*)/(?P<pick>\d*)', \
+            'project.view.show'), \
+    url(r'view/(?P<id>\d*)', 'project.view.show'),
+    url(r'recent', 'project.recent.show'),
+    url(r'^$', 'project.mainpage.show'),
+    url(r'main', 'project.mainpage.show'),
+    url(r'submit', 'project.submit.draft'),
+    url(r'donate', 'project.donate.show'),
+    url(r'updateIndex', 'project.updater.updateindex'),
+)

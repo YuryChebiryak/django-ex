@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+base_url =  "http://127.0.0.1:8000/"
+#data_dir = os.path.join(os.environ['HOME'], "data/")
+data_dir = "data/"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    #'debug_toolbar',
     'welcome',
 )
 
