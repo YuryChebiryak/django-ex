@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-base_url =  "http://127.0.0.1:8000/"
+base_url =  ""
 #data_dir = os.path.join(os.environ['HOME'], "data/")
 data_dir = "data/"
 
