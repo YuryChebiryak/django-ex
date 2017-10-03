@@ -64,7 +64,6 @@ def RetrieveCardID(name):
     #url = cardByName + name + "]" # % name
     url = cardEscaped % ( urllib.parse.quote(name) )
     print ("trying to open url %s" % url)
-    #sys.exit()
     f = urllib.request.urlopen(url)
     if not f:
         print ("problem opening url %s" % url)
@@ -77,10 +76,11 @@ def RetrieveCardID(name):
         #print f.read()
     # parse the table, find the element with exact card name
     # return card id
-    i = "(img src)(.*)(multiverseid=)(\\d+)(.*)(alt=\")" + name + "\""
+    i = "(img src)(.*)(multiverseid=)(\\d+)(.*)" #"(alt=\")" + name + "\""
     s = re.search(re.compile(i), str(html))
     if s:
         res = int(s.group(4))
+    #sys.exit()
     return res
 
 def GetCardImgById(id):
