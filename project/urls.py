@@ -5,6 +5,7 @@ admin.autodiscover()
 from django.conf.urls.static import static
 #import settings
 
+
 urlpatterns = patterns('',
     #url(r'^admin/', include(admin.site.urls)),
     url(r'view/(?P<id>\d*)/(?P<pack>\d*)/(?P<pick>\d*)', \
@@ -16,4 +17,6 @@ urlpatterns = patterns('',
     url(r'submit', 'project.submit.draft'),
     url(r'donate', 'project.donate.show'),
     url(r'updateIndex', 'project.updater.updateindex'),
+    url(r'health', 'project.health.liveliness'),
+    url(r'readiness', 'project.health.readiness')
 )
