@@ -13,9 +13,8 @@ class Card:
 
 
 def ReadCard(s):
-    assert(isinstance(s, basestring))
+    assert(isinstance(s, str))
     groups = s.split('|')
     if len(groups) == 3:
         return Card(groups[0], int(groups[1]), groups[2])
     return None
-

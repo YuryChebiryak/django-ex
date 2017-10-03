@@ -1,6 +1,6 @@
 __author__ = 'yurychebiryak'
 import datetime
-from Drafts import DraftID, DraftState
+from .Drafts import DraftID, DraftState
 from django.http import HttpResponseRedirect
 import os
 
@@ -27,4 +27,3 @@ def handle(request):
     id = handle_uploaded_file(request.FILES['myfile'])
     s = DraftState.DraftState(id, 1, 1)
     return HttpResponseRedirect( DraftState.GetDraftUrl(s))
-

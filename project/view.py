@@ -2,17 +2,17 @@
 __author__ = 'yurychebiryak'
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from Drafts.DraftState import DraftState, GetDraftUrl, GetNextPick, GetPrevPick, GetNextPack
-from Drafts.DraftID import readPicks
-from navigationContext import uniteContexts
-from navigationContext import navContext
-from Cards.CardArt import GetCard
+from .Drafts.DraftState import DraftState, GetDraftUrl, GetNextPick, GetPrevPick, GetNextPack
+from .Drafts.DraftID import readPicks
+from project.navigationContext import uniteContexts
+from project.navigationContext import navContext
+from .Cards.CardArt import GetCard
 #import Cards.CardArt
 
 def show(request, id, pack='1', pick='1'):
     s = DraftState(int(id), int(pack), int(pick))
-    print " Generating view of draft with id %d, pack %d, pick %d " % \
-           ( s.id, s.pack, s.pick)
+    print (" Generating view of draft with id %d, pack %d, pick %d " % \
+           ( s.id, s.pack, s.pick) )
     cards = []
     event, time, picks, prevPicks, drafter = readPicks(s)
     for name in picks:

@@ -1,5 +1,5 @@
 __author__ = 'yurychebiryak'
-from settings import base_url
+from project.settings import base_url
 
 navContext = {
          'main' : base_url + "main",
@@ -9,4 +9,4 @@ navContext = {
          }
 
 def uniteContexts(a, b):
-    return { x: a[x] if x in a else b[x] for x in a.keys() + b.keys() }
+    return { x: a[x] if x in a else b[x] for x in list(a.keys()) + list(b.keys()) }

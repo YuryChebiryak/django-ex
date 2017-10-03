@@ -1,7 +1,8 @@
 __author__ = 'yurychebiryak'
 import os
 import glob
-from DraftState import DraftState
+#from .Drafts.DraftState import DraftState
+from project.Drafts.DraftState import DraftState
 import re
 from project.settings import base_url
 from project.settings import data_dir
@@ -26,7 +27,7 @@ def readPicks(s):
     time = ""
     filename = GetDraftFilenameByID(s.id)
     #filename = Draft(s.id).filename
-    with open(filename, 'rb') as file:
+    with open(filename, 'r') as file:
         pick = "Pack %d pick %d:" % (s.pack, s.pick)
         event = r'^Event #: (\d*)'
         card = r'^(--> |    )(.*)$'
@@ -38,7 +39,8 @@ def readPicks(s):
         pickedCardRe = re.compile(pickedCard)
         found = False
         lineno = -1
-        for line in file:
+        lines = file.readlines()
+        for line in lines:
             lineno += 1
             t = timere.match(line)
             if t:
@@ -79,7 +81,7 @@ def GetDraftFilenameByID(id):
 def GetDrafts():
     dir = os.path.join(data_dir, "storedDrafts/")
     print (" found files: ")
-    files = filter(os.path.isfile, glob.glob(dir + "*.txt"))
+    files = list(filter(os.path.isfile, glob.glob(dir + "*.txt")))
     return files
 
 def GetRecentDrafts(n):

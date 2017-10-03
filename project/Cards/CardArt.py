@@ -1,22 +1,27 @@
 __author__ = 'yurychebiryak'
-import urllib
+import urllib.request
+#from urllib import quote
+import urllib.parse
 import re
 import os
-import Card
+from project.Cards.Card import Card, gatherer, ReadCard
 import hashlib
 
 from project.settings import data_dir
 
-cardByName = Card.gatherer + "/Pages/Search/Default.aspx?name=[\""
+cardByName = gatherer + "/Pages/Search/Default.aspx?name=["
+cardEscaped = gatherer + "/Pages/Search/Default.aspx?name=[\"%s\"]"
 
 #img = "(<img src=\"../../Handlers/Image.ashx?multiverseid=)(\\d+)(.*)(alt=\"\\w*\")(.*)(/>)"
-imgSrc = Card.gatherer + "/Handlers/Image.ashx?multiverseid=%d&type=card"
+imgSrc = gatherer + "/Handlers/Image.ashx?multiverseid=%d&type=card"
 
 def GetIndexFile(name):
     #we create many index files, so that it doesnt take too long to look thru them
     #   first 3 letters of card name serve as the index file name
-    prefix = name[:3]
+    prefix = name[:3].encode('utf-8')
     m = hashlib.md5()
+    #prefix.encode('utf-8')
+    #m.encode('utf-8')
     m.update(prefix)
     filename = m.hexdigest()
     index = os.path.join(data_dir, "cardart/%s.txt" % filename)
@@ -35,7 +40,7 @@ def GetCard(name):
     with open(index) as f:
         content = f.readlines()
         for line in content:
-            c = Card.ReadCard(line)
+            c = ReadCard(line)
             if not c:
                 break
             if c.name == name:
@@ -43,9 +48,9 @@ def GetCard(name):
         f.close()
     id = RetrieveCardID(name)
     if id == -1:
-        c = Card.Card(name, id, cardByName+name +"\"]")
+        c = Card(name, id, cardByName+name +"]")
     else:
-        c = Card.Card(name, id, GetCardImgById(id))
+        c = Card(name, id, GetCardImgById(id))
     with open(index, "a") as f:
         f.write("%s|%d|%s\r\n"  %(c.name, c.id, c.url))
     return c
@@ -56,22 +61,24 @@ def RetrieveCardID(name):
     @param name: Card name
     """
     res = -1
-    url = cardByName + name + "]" # % name
+    #url = cardByName + name + "]" # % name
+    url = cardEscaped % ( urllib.parse.quote(name) )
     print ("trying to open url %s" % url)
-    f = urllib.urlopen(url)
+    #sys.exit()
+    f = urllib.request.urlopen(url)
     if not f:
-        print "problem opening url %s" % url
+        print ("problem opening url %s" % url)
         return res
     html = f.read()
     if not html:
-        print "problem reading url %s" % url
+        print ("problem reading url %s" % url)
         return res
     # now we need a card identifier for the card with exactly that name (there can be multiple matches)
         #print f.read()
     # parse the table, find the element with exact card name
     # return card id
     i = "(img src)(.*)(multiverseid=)(\\d+)(.*)(alt=\")" + name + "\""
-    s = re.search(re.compile(i), html)
+    s = re.search(re.compile(i), str(html))
     if s:
         res = int(s.group(4))
     return res
