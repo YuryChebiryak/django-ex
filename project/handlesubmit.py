@@ -2,11 +2,14 @@ __author__ = 'yurychebiryak'
 import datetime
 from .Drafts import DraftID, DraftState
 from django.http import HttpResponseRedirect
+from project.settings import data_dir
 import os
 
 def handle_uploaded_file(file):
     time = datetime.datetime.now()
     print (" handle uploaded file " )
+    if not os.path.exists(os.path.join(data_dir,"/storedDrafts/")):
+        os.makedirs(os.path.join(data_dir,"storedDrafts"));
     while True:
         id = time - datetime.datetime(1970,1,1)
         id = int (id.total_seconds() * 1000)
