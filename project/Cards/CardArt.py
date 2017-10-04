@@ -18,6 +18,8 @@ imgSrc = gatherer + "/Handlers/Image.ashx?multiverseid=%d&type=card"
 def GetIndexFile(name):
     #we create many index files, so that it doesnt take too long to look thru them
     #   first 3 letters of card name serve as the index file name
+    if not os.path.exists(os.path.join(data_dir,"cardart/")):
+        os.makedirs(os.path.join(data_dir,"cardart/"));
     prefix = name[:3].encode('utf-8')
     m = hashlib.md5()
     #prefix.encode('utf-8')
@@ -36,6 +38,8 @@ def GetCard(name):
     @param name: card name
     @return: return the card
     """
+    if not os.path.exists(os.path.join(data_dir,"cardart/")):
+        os.makedirs(os.path.join(data_dir,"cardart/"));
     index = GetIndexFile(name)
     with open(index) as f:
         content = f.readlines()
