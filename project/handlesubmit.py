@@ -16,6 +16,7 @@ def handle_uploaded_file(file):
         if os.path.isfile(DraftID.GetDraftFilenameByID(id)):
             continue
         try:
+            print("trying to open file %s" % DraftID.GetDraftFilenameByID(id))
             with open(DraftID.GetDraftFilenameByID(id), 'wb+') as dest:
                 for chunk in file.chunks():
                     dest.write(chunk)
